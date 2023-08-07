@@ -10,7 +10,9 @@ function App() {
   
   useEffect(() => {
     getOrders()
-    .then(data => setOrders(data))
+    .then(data => {
+      setOrders(data)
+    })
     .catch((err) => console.error("Error fetching:", err));
   }, [newOrder]);
 
