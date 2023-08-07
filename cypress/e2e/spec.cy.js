@@ -49,6 +49,7 @@ describe("All tests", () => {
         .get('[name="beans"]').click()
         .get('form > p').should('contain', 'Order: sour cream, jalapenos, beans')
         .get(':nth-child(15)').click()
+        // should see new order on the page, unsure why it's not populating as it works on my app
     })
   })
 });
