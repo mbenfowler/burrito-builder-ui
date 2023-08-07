@@ -16,7 +16,7 @@ describe("All tests", () => {
         .get('input').should('not.have.value')
         .get('form').children().should('have.length', 15)
         .get('form > p').should('contain', 'Order: Nothing selected')
-        .get('section').children().should('have.length',)
+        .get('section').children().should('have.length', 3)
       })
     });
 
