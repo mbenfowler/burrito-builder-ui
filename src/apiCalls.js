@@ -1,12 +1,6 @@
 export const getOrders = () => {
   return fetch("http://localhost:3001/api/v1/orders")
-    .then(response => {
-      if(response.ok) {
-        response.json()
-      } else {
-        throw new Error('An error occurred')
-      }
-    })
+    .then(response => response.json())
 };
 
 export const postOrders = (order) => {
@@ -17,11 +11,5 @@ export const postOrders = (order) => {
     },
     body: JSON.stringify(order)
   })
-  .then(res => {
-    if(res.ok) {
-      return res.ok
-    } else {
-      throw new Error('An error occurred')
-    }
-  })
+  .then(res => res.ok)
 }
