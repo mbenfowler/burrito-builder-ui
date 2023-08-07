@@ -6,7 +6,6 @@ const Orders = ({orders}) => {
   let orderEls = [];
   
   if (orders) {
-    console.log(orders.orders)
     orderEls = orders.orders.map(order => {
       return (
         <div className="order">

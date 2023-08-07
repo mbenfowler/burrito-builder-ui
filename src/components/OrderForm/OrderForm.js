@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { postOrders } from "../../apiCalls";
 
 function OrderForm(props) {
   const [name, setName] = useState("");
@@ -6,7 +7,19 @@ function OrderForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    clearInputs();
+    postOrders({name: name, ingredients: ingredients})
+    .then(goodRes => {
+      if(goodRes) {
+        clearInputs();
+        props.setNewOrder(name)
+      }
+    })
+    .catch((err) => console.error("Error fetching:", err))
+  }
+
+  function addIngredient(e) {
+    e.preventDefault();
+    setIngredients(prev => [...prev, e.target.name])
   }
 
   function clearInputs() {
@@ -33,7 +46,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={addIngredient}
       >
         {ingredient}
       </button>
@@ -47,14 +60,22 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={(e) => setName(e.target.value)}
       />
 
       {ingredientButtons}
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 
-      <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
+      <button onClick={(e) => {
+        if(name.length && ingredients.length) {
+          console.log('here')
+          handleSubmit(e)
+        } else {
+          alert("Please fill out required fields!")
+        }
+
+      }}>Submit Order</button>
     </form>
   );
 }

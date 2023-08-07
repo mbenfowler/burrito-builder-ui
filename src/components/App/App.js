@@ -6,18 +6,19 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 
 function App() {
   const [orders, setOrders] = useState()
+  const [newOrder, setNewOrder] = useState()
   
   useEffect(() => {
     getOrders()
     .then(data => setOrders(data))
     .catch((err) => console.error("Error fetching:", err));
-  }, []);
+  }, [newOrder]);
 
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm />
+        <OrderForm setNewOrder={setNewOrder}/>
       </header>
 
       <Orders orders={orders} />
