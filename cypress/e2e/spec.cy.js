@@ -4,8 +4,7 @@ describe("All tests", () => {
       cy.intercept('http://localhost:3001/api/v1/orders', {
         method: 'GET',
         statusCode: 200,
-        body: {}
-        // i was unable to get this body response to not error, even with a fixture with the exact same shape as the data
+        fixture: 'orders'
       }).as('initialGET')
 
       cy.visit("http://localhost:3000/")
@@ -17,7 +16,7 @@ describe("All tests", () => {
         .get('input').should('not.have.value')
         .get('form').children().should('have.length', 15)
         .get('form > p').should('contain', 'Order: Nothing selected')
-        .get('section > p').should('contain', 'No orders yet!')
+        .get('section').children().should('have.length',)
       })
     });
 
@@ -36,7 +35,7 @@ describe("All tests", () => {
     beforeEach(() => {
       cy.intercept('http://localhost:3001/api/v1/orders', {
         method: 'POST',
-        statusCode: 201,
+        statusCode: 200,
         body: {name:'generic name', ingredients:['sour cream', 'jalapenos', 'beans']}
       }).as('newOrder')
 
