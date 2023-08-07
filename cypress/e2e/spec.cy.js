@@ -5,6 +5,7 @@ describe("All tests", () => {
         method: 'GET',
         statusCode: 200,
         body: {}
+        // i was unable to get this body response to not error, even with a fixture with the exact same shape as the data
       }).as('initialGET')
 
       cy.visit("http://localhost:3000/")
