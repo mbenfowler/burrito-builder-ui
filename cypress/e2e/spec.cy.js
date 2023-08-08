@@ -50,11 +50,12 @@ describe("All tests", () => {
         .get('form > p').should('contain', 'Order: sour cream, jalapenos, beans')
         .intercept('http://localhost:3001/api/v1/orders', {
           method: 'POST',
-          statusCode: 200,
-          body: {name:'generic name', ingredients:['sour cream', 'jalapenos', 'beans']}
+          statusCode: 201,
+          body: JSON.stringify({id: 4, name:'generic name', ingredients:['sour cream', 'jalapenos', 'beans']})
         }).as('newOrder')
         .get(':nth-child(15)').click()
-        // should see new order on the page, unsure why it's not populating as it works on my app
+        cy.wait('@newOrder')
+        
     })
   })
 });
