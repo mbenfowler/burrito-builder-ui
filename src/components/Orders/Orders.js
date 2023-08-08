@@ -2,11 +2,10 @@ import React from "react";
 import "./Orders.css";
 
 const Orders = ({orders}) => {
-  
-  let orderEls = [];
-  
+  let orderEls;
+  console.log(orders)
   if (orders) {
-    orderEls = orders.orders.map(order => {
+    orderEls = orders.map(order => {
       return (
         <div className="order">
           <h3>{order.name}</h3>

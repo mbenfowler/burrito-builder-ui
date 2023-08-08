@@ -5,17 +5,32 @@ import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 
 function App() {
-  const [orders, setOrders] = useState()
+  const [orders, setOrders] = useState([])
   const [newOrder, setNewOrder] = useState()
   
   useEffect(() => {
     getOrders()
     .then(data => {
-      setOrders(data)
+      console.log(data)
+      setOrders(data.orders)
     })
     .catch((err) => console.error("Error fetching:", err));
-  }, [newOrder]);
+  }, []);
 
+  useEffect(() => {
+    console.log(orders)
+    if(newOrder?.id) {
+      setOrders([...orders, newOrder])
+    }
+  }, [newOrder])
+
+  // const addOrder = () => {
+  //   console.log(orders)
+  //   if(newOrder?.id) {
+  //     setOrders([...orders, newOrder])
+  //   }
+  // }
+console.log(orders)
   return (
     <main className="App">
       <header>

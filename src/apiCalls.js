@@ -11,5 +11,5 @@ export const postOrders = (order) => {
     },
     body: JSON.stringify(order)
   })
-  .then(res => res.ok)
+  .then(res => res.json())
 }

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { postOrders } from "../../apiCalls";
 
-function OrderForm(props) {
+function OrderForm({ setNewOrder, addOrder }) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
     postOrders({name: name, ingredients: ingredients})
-    .then(goodRes => {
-      if(goodRes) {
-        clearInputs();
-        props.setNewOrder(name)
-      }
+    .then(data => {
+      console.log(data)
+      // if(data.ok) {
+        setNewOrder(data)
+      // }
+      clearInputs();
     })
     .catch((err) => console.error("Error fetching:", err))
   }
@@ -69,7 +70,6 @@ function OrderForm(props) {
 
       <button onClick={(e) => {
         if(name.length && ingredients.length) {
-          console.log('here')
           handleSubmit(e)
         } else {
           alert("Please fill out required fields!")
