@@ -55,6 +55,10 @@ describe("All tests", () => {
         }).as('newOrder')
         .get(':nth-child(15)').click()
         cy.wait('@newOrder')
+        cy.get('section > :nth-child(4)').should('contain', 'generic name')
+        .get('section > :nth-child(4)').should('contain', 'sour cream')
+        .get('section > :nth-child(4)').should('contain', 'jalapenos')
+        .get('section > :nth-child(4)').should('contain', 'beans')
         
     })
   })
